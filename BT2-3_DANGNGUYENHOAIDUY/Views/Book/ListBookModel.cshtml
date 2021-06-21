@@ -1,0 +1,59 @@
+﻿@model IEnumerable<BT2_3_DANGNGUYENHOAIDUY.Models.Book>
+
+@{
+    ViewBag.Title = "Danh sách Book của Hoài Duy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách Book</h2>
+<style>
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        vertical-align: middle;
+    }
+
+    .body-content {
+        max-width: 60%;
+    }
+</style>
+<p>
+    @Html.ActionLink("Create New", "CreateBook")
+</p>
+<table class="table" cellpadding="10" border="1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image_cover)
+            </th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                <img src="@item.Image_cover" width="160" title="cover" />
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id })*@
+                <a href="/Book/EditBook/@item.Id" title="Edit Book"> Edit </a>
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "ListBookModel", new { id = item.Id }, new { onclick = "return confirm('Bạn có chắc xóa cuốn sách này?');" })
+                @*<a href="/Book/DeleteBook/@item.Id " title="Delete Book"> Delete </a>*@
+            </td>
+        </tr>
+    }
+</table>
